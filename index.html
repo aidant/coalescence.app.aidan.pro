@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coalescence</title>
+    <style>
+      html {
+        height: 100%;
+        background-color: black;
+        color: white;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+      label {
+        display: block;
+      }
+      select,
+      input {
+        display: inline-block;
+        width: 100%;
+        box-sizing: border-box;
+      }
+    </style>
+    <script>
+      addEventListener('load', () => {
+        const form = document.querySelector('form')
+        const img = document.querySelector('img')
+
+        const update = (event) => {
+          event.preventDefault()
+
+          const state = Object.fromEntries(new FormData(form).entries())
+          if (state.rank !== 'none') {
+            img.src = `https://coalescence.api.aidan.pro/${state.hero}-${state.level}-${state.rank}.png`
+          } else {
+            img.src = `https://coalescence.api.aidan.pro/${state.hero}-${state.level}.png`
+          }
+        }
+
+        form.addEventListener('change', update)
+        form.addEventListener('submit', update)
+      })
+    </script>
+  </head>
+  <body>
+    <main>
+      <form>
+        <fieldset>
+          <legend>Coalescence</legend>
+          <img src="https://coalescence.api.aidan.pro/ana-0.png">
+          <label>
+            Hero:
+            <select name="hero">
+              <option>ana</option>
+              <option>ashe</option>
+              <option>bastion</option>
+              <option>brigitte</option>
+              <option>doomfist</option>
+              <option>dva</option>
+              <option>genji</option>
+              <option>hanzo</option>
+              <option>junkrat</option>
+              <option>lucio</option>
+              <option>mccree</option>
+              <option>mei</option>
+              <option>mercy</option>
+              <option>moira</option>
+              <option>orisa</option>
+              <option>pharah</option>
+              <option>reaper</option>
+              <option>reinhardt</option>
+              <option>roadhog</option>
+              <option>soldier</option>
+              <option>sombra</option>
+              <option>symmetra</option>
+              <option>torbjorn</option>
+              <option>tracer</option>
+              <option>widowmaker</option>
+              <option>winston</option>
+              <option>wrecking-ball</option>
+              <option>zarya</option>
+              <option>zenyatta</option>
+            </select>
+          </label>
+          <label>
+            Level:
+            <input name="level" type="number" value="0" min="0" max="2990" step="10">
+          </label>
+          <label>
+            Rank:
+            <select name="rank">
+              <option>none</option>
+              <option>bronze</option>
+              <option>silver</option>
+              <option>gold</option>
+              <option>platinum</option>
+              <option>diamond</option>
+              <option>master</option>
+              <option>grandmaster</option>
+              <option>top500</option>
+            </select>
+          </label>
+        </fieldset>
+      </form>
+    </main>
+  </body>
+</html>
+
+
