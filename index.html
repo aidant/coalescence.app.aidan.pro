@@ -1,32 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class='h-full bg-black text-white'>
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coalescence</title>
     <style>
-      html {
-        height: 100%;
-        background-color: black;
-        color: white;
-      }
-      body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        margin: 0;
-      }
-      label {
-        display: block;
-      }
-      select,
-      input {
-        display: inline-block;
-        width: 100%;
-        box-sizing: border-box;
-      }
+      @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+      @import url('https://cdn.skypack.dev/tailwindcss@^2/dist/tailwind.min.css');
     </style>
     <script>
       addEventListener('load', () => {
@@ -37,10 +17,17 @@
           event.preventDefault()
 
           const state = Object.fromEntries(new FormData(form).entries())
-          if (state.rank !== 'none') {
-            img.src = `https://coalescence.api.aidan.pro/${state.hero}-${state.level}-${state.rank}.png`
+
+          const hero = state.hero
+          const level = Math.floor(Math.min(Math.max(Number(state.level), 0), 2990) / 10) * 10
+          const rank = state.rank
+
+          form.elements.namedItem('level').value = level
+
+          if (rank !== 'none') {
+            img.src = `https://coalescence.api.aidan.pro/${hero}-${level}-${rank}.png`
           } else {
-            img.src = `https://coalescence.api.aidan.pro/${state.hero}-${state.level}.png`
+            img.src = `https://coalescence.api.aidan.pro/${hero}-${level}.png`
           }
         }
 
@@ -49,15 +36,15 @@
       })
     </script>
   </head>
-  <body>
+  <body class="flex flex-col items-center justify-center h-full">
     <main>
       <form>
-        <fieldset>
+        <fieldset class='border-2 p-4'>
           <legend>Coalescence</legend>
-          <img src="https://coalescence.api.aidan.pro/ana-0.png">
-          <label>
+          <img style="image-rendering: pixelated" src="https://coalescence.api.aidan.pro/ana-0.png">
+          <label class="block">
             Hero:
-            <select name="hero">
+            <select name="hero" class="inline-block w-full bg-black border-2 pl-1">
               <option>ana</option>
               <option>ashe</option>
               <option>bastion</option>
@@ -89,13 +76,13 @@
               <option>zenyatta</option>
             </select>
           </label>
-          <label>
+          <label class="block">
             Level:
-            <input name="level" type="number" value="0" min="0" max="2990" step="10">
+            <input name="level" class="inline-block w-full bg-black border-2 pl-2" type="number" value="0" min="0" max="2990" step="10">
           </label>
-          <label>
+          <label class="block">
             Rank:
-            <select name="rank">
+            <select name="rank" class="inline-block w-full bg-black border-2 pl-1">
               <option>none</option>
               <option>bronze</option>
               <option>silver</option>
